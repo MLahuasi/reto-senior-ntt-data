@@ -97,6 +97,20 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-database-postgresql</artifactId>
 		</dependency>
+
+    <!-- Mapeo DTOS y Enitidades -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>1.5.5.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <version>1.5.5.Final</version>
+      <scope>provided</scope>
+    </dependency>
+           
         
   </dependencies>
 
@@ -144,6 +158,21 @@
         <version>${surefire-plugin.version}</version>
         <configuration>
           <!-- Aquí puedes afinar includes/excludes de tests -->
+        </configuration>
+      </plugin>
+
+      <!-- Mapeo DTOs con Entidades -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>1.5.5.Final</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       
