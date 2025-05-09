@@ -28,7 +28,7 @@ cliente-service/
 │   ├── main/
 │   │   ├── java/com/jmlq/cliente_service/
 │   │   │   ├── controller/
-│   │   │   │   └── ClienteController.java (pendiente)
+│   │   │   │   └── ClienteController.java *
 │   │   │   ├── dto/
 │   │   │   │   ├── ClienteCreateDTO.java *
 │   │   │   │   ├── ClienteDeleteDTO.java *
