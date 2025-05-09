@@ -34,8 +34,8 @@ Donde:
 ```
 cliente-service/
 ├── pom.xml *
-├── Dockerfile (pendiente)
-├── .dockerignore (pendiente)
+├── Dockerfile (p)
+├── .dockerignore (p)
 ├── src/
 │   ├── main/
 │   │   ├── java/com/jmlq/cliente_service/
@@ -46,35 +46,30 @@ cliente-service/
 │   │   │   │   ├── ClienteDeleteDTO.java *
 │   │   │   │   ├── ClienteReadDTO.java *
 │   │   │   │   ├── ClienteResponseDTO.java *
-│   │   │   │   ├── ClienteUpdateDTO.java *
-│   │   │   │   ├── PersonaDTO.java *
+│   │   │   │   └── ClienteUpdateDTO.java *
 │   │   │   ├── mapper/
 │   │   │   │   └── ClienteMapper.java *
 │   │   │   ├── model/
-│   │   │   │   ├── Cliente.java *
-│   │   │   │   └── Persona.java *
+│   │   │   │   ├── Persona.java *
+│   │   │   │   └── Cliente.java *
 │   │   │   ├── repository/
 │   │   │   │   └── ClienteRepository.java *
 │   │   │   ├── service/
 │   │   │   │   ├── ClienteService.java *
 │   │   │   │   └── impl/
 │   │   │   │       └── ClienteServiceImpl.java *
-│   │   │   ├── event/
-│   │   │   │   ├── ClienteCreated.java (pendiente)
-│   │   │   │   ├── ClienteRead.java (pendiente)
-│   │   │   │   ├── ClienteUpdate.java (pendiente)
-│   │   │   │   └── ClienteDelete.java (pendiente)
-│   │   │   └── config/
-│   │   │       ├── RabbitConfig.java (pendiente)
-│   │   │       └── SwaggerConfig.java (opcional, pendiente)
-│   │   └── resources/
-│   │       └── application.yml *
-│   └── test/
-│       └── java/com/jmlq/cliente_service/
-│           ├── service/ClienteServiceTest.java (pendiente)
-│           └── controller/ClienteControllerTest.java (pendiente)
-└── README.md (pendiente documentación de uso)
-
+│   │   │   ├── config/
+│   │   │   │   └── RabbitConfig.java (p)
+│   │   │   └── event/
+│   │   │       └── ClienteCreatedEvent.java (p)
+│   ├── test/
+│   │   └── java/com/jmlq/cliente_service/
+│   │       ├── ClienteServiceTest.java (p)
+│   │       └── ClienteControllerTest.java (p)
+│   └── resources/
+│       ├── application.yml *
+│       └── application-test.yml (p)
+└── README.md (p)
 ```
 
 > cuenta-service: Fuentes microservicio #2
@@ -83,24 +78,18 @@ cliente-service/
 
 cuenta-service/
 ├── pom.xml *
-├── Dockerfile (pendiente)
-├── .dockerignore (pendiente)
+├── Dockerfile (p)
+├── .dockerignore (p)
 ├── src/
 │   ├── main/
 │   │   ├── java/com/jmlq/cuenta_service/
 │   │   │   ├── controller/
-│   │   │   │   └── CuentaController.java (pendiente)
+│   │   │   │   └── CuentaController.java (p)
 │   │   │   ├── dto/
 │   │   │   │   ├── CuentaCreateDTO.java *
-│   │   │   │   ├── CuentaDeleteDTO.java *
 │   │   │   │   ├── CuentaReadDTO.java *
-│   │   │   │   ├── CuentaResponseDTO.java *
-│   │   │   │   ├── CuentaUpdateDTO.java *
 │   │   │   │   ├── MovimientoCreateDTO.java *
-│   │   │   │   ├── MovimientoDeleteDTO.java *
-│   │   │   │   ├── MovimientoReadDTO.java *
-│   │   │   │   └── MovimientoResponseDTO.java *
-│   │   │   │   ├── MovimientoUpdateDTO.java *
+│   │   │   │   └── MovimientoReadDTO.java *
 │   │   │   ├── mapper/
 │   │   │   │   ├── CuentaMapper.java *
 │   │   │   │   └── MovimientoMapper.java *
@@ -111,30 +100,24 @@ cuenta-service/
 │   │   │   │   ├── CuentaRepository.java *
 │   │   │   │   └── MovimientoRepository.java *
 │   │   │   ├── service/
-│   │   │   │   ├── CuentaService.java (pendiente)
-│   │   │   │   ├── MovimientoService.java (pendiente)
+│   │   │   │   ├── CuentaService.java (p)
+│   │   │   │   ├── MovimientoService.java (p)
 │   │   │   │   └── impl/
-│   │   │   │       ├── CuentaServiceImpl.java (pendiente)
-│   │   │   │       └── MovimientoServiceImpl.java (pendiente)
-│   │   │   ├── event/
-│   │   │   │   ├── CuentaCreated.java (pendiente)
-│   │   │   │   ├── CuentaRead.java (pendiente)
-│   │   │   │   ├── CuentaUpdate.java (pendiente)
-│   │   │   │   ├── CuentaDelete.java (pendiente)
-│   │   │   │   ├── MovimientoCreated.java (pendiente)
-│   │   │   │   ├── MovimientoRead.java (pendiente)
-│   │   │   │   ├── MovimientoUpdate.java (pendiente)
-│   │   │   │   └── MovimientoDelete.java (pendiente)
-│   │   │   └── config/
-│   │   │       ├── RabbitConfig.java (pendiente)
-│   │   │       └── SwaggerConfig.java (opcional, pendiente)
-│   │   └── resources/
-│   │       └── application.yml *
-│   └── test/
-│       └── java/com/jmlq/cuenta_service/
-│           ├── service/CuentaServiceTest.java (pendiente)
-│           └── controller/CuentaControllerTest.java (pendiente)
-└── README.md (pendiente documentación de uso)
+│   │   │   │       ├── CuentaServiceImpl.java (p)
+│   │   │   │       └── MovimientoServiceImpl.java (p)
+│   │   │   ├── config/
+│   │   │   │   └── RabbitConfig.java (p)
+│   │   │   └── event/
+│   │   │       ├── CuentaCreatedEvent.java (p)
+│   │   │       └── MovimientoCreatedEvent.java (p)
+│   ├── test/
+│   │   └── java/com/jmlq/cuenta_service/
+│   │       ├── CuentaServiceTest.java (p)
+│   │       └── CuentaControllerTest.java (p)
+│   └── resources/
+│       ├── application.yml *
+│       └── application-test.yml (p)
+└── README.md (p)
 
 ```
 
@@ -344,3 +327,49 @@ Las solicitudes se las realiza con: Body / raw / json
 ```
 
 ![](./assets/4-swagger.png)
+
+## STATUS DESARROLLO
+
+| Servicio            | Funcionalidad                                                          | Estado |
+| ------------------- | ---------------------------------------------------------------------- | :----: |
+| **Cliente-Service** | CRUD de clientes (POST, GET, PUT, DELETE)                              |   \*   |
+| Cliente-Service     | Mapear DTO ↔ Entidad (`ClienteCreateDTO`, `ClienteReadDTO`…)           |   \*   |
+| Cliente-Service     | Repositorio JPA (`ClienteRepository`)                                  |   \*   |
+| Cliente-Service     | Capa de servicio (`ClienteService` + `ClienteServiceImpl`)             |   \*   |
+| Cliente-Service     | Controller REST (`ClienteController`)                                  |   \*   |
+| Cliente-Service     | Persistencia con Spring Data JPA y PostgreSQL                          |   \*   |
+| Cliente-Service     | Configuración de propiedades en `application.yml`                      |   \*   |
+| Cliente-Service     | README con instrucciones generales                                     |   \*   |
+| Cliente-Service     | Dockerfile                                                             |  (p)   |
+| Cliente-Service     | `.dockerignore`                                                        |  (p)   |
+| Cliente-Service     | Configuración RabbitMQ (`RabbitConfig`)                                |  (p)   |
+| Cliente-Service     | Definición de eventos (ej. `ClienteCreatedEvent`)                      |  (p)   |
+| Cliente-Service     | Publicación de eventos al crear/actualizar cliente                     |  (p)   |
+| Cliente-Service     | Consumo de eventos con `@RabbitListener`                               |  (p)   |
+| Cliente-Service     | Swagger/OpenAPI (`springdoc-openapi`)                                  |   \*   |
+| Cliente-Service     | Pruebas unitarias (servicio + controlador)                             |  (p)   |
+| Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)                  |  (p)   |
+| Cliente-Service     | Perfil de pruebas (`application-test.yml`)                             |  (p)   |
+| Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                    |  (p)   |
+| Cliente-Service     | Manejador global de excepciones (`@ControllerAdvice`)                  |  (p)   |
+| **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                               |  (p)   |
+| Cuenta-Service      | CRUD de movimientos (POST, GET)                                        |  (p)   |
+| Cuenta-Service      | Mapear DTO ↔ Entidad (`CuentaCreateDTO`, `MovimientoReadDTO`…)         |   \*   |
+| Cuenta-Service      | Repositorios JPA (`CuentaRepository`, `MovimientoRepository`)          |   \*   |
+| Cuenta-Service      | Persistencia con Spring Data JPA y PostgreSQL                          |   \*   |
+| Cuenta-Service      | Configuración de propiedades en `application.yml`                      |   \*   |
+| Cuenta-Service      | Dockerfile                                                             |  (p)   |
+| Cuenta-Service      | `.dockerignore`                                                        |  (p)   |
+| Cuenta-Service      | Configuración RabbitMQ (`RabbitConfig`)                                |  (p)   |
+| Cuenta-Service      | Definición de eventos (`CuentaCreatedEvent`, `MovimientoCreatedEvent`) |  (p)   |
+| Cuenta-Service      | Publicación de eventos al crear cuenta/movimiento                      |  (p)   |
+| Cuenta-Service      | Consumo de eventos con `@RabbitListener`                               |  (p)   |
+| Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones    |  (p)   |
+| Cuenta-Service      | Controller REST (`CuentaController`)                                   |  (p)   |
+| Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                                  |  (p)   |
+| Cuenta-Service      | Pruebas unitarias (servicio + controlador)                             |  (p)   |
+| Cuenta-Service      | Pruebas de integración (Testcontainers o BD embebida)                  |  (p)   |
+| Cuenta-Service      | Perfil de pruebas (`application-test.yml`)                             |  (p)   |
+| Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                    |  (p)   |
+| Cuenta-Service      | Manejador global de excepciones (`@ControllerAdvice`)                  |  (p)   |
+| Cuenta-Service      | README específico del servicio                                         |  (p)   |
