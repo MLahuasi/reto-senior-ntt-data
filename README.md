@@ -4,6 +4,18 @@
     https://github.com/MLahuasi/reto-senior-ntt-data.git
 ```
 
+# AMBIENTE
+
+1. Se desarrollo con la version de Java
+
+```
+    openjdk 20.0.2 2023-07-18
+    OpenJDK Runtime Environment (build 20.0.2+9-78)
+    OpenJDK 64-Bit Server VM (build 20.0.2+9-78, mixed mode, sharing)
+```
+
+2. El IDE de desarrollo fue VSCode. **NOTA**: Visual Studio Code permitió usar la versión 17 (revisar archivos pom.xml)
+
 # DISTRIBUCION ENTREGABLES
 
 El reto contiene los siguientes directorios:
@@ -124,6 +136,43 @@ cuenta-service/
 │           └── controller/CuentaControllerTest.java (pendiente)
 └── README.md (pendiente documentación de uso)
 
+```
+
+## Levantar Imagen Docker BDD y Rabbit
+
+1. Ingresar al directorio [environment](./environment/)
+2. Ejecutar el comando:
+
+```
+    docker compose up -d
+```
+
+3. Se crea contenedor `Docker` con imagenes: `Postgres` y `Rabbit`
+
+   ![](./assets/1-docker-environment.png)
+
+4. Además se crean las tablas en la BDD
+
+   ![](./assets/2-create-tables.png)
+
+## EJECUTAR PROYECTOS
+
+### cliente-service
+
+1. Ingresar al directorio [cliente-service](./cliente-service/) por consola
+2. Ejecutar
+
+```
+    mvn clean spring-boot:run
+```
+
+### cuenta-service
+
+1. Ingresar al directorio [cuenta-service](./cuenta-service/) por consola
+2. Ejecutar
+
+```
+    mvn clean spring-boot:run
 ```
 
 ## ENDPOINTS
@@ -285,23 +334,6 @@ Las solicitudes se las realiza con: Body / raw / json
 ```
 204 No Content
 ```
-
-## Levantar Imagen Docker BDD y Rabbit
-
-1. Ingresar al directorio [environment](./environment/)
-2. Ejecutar el comando:
-
-```
-    docker compose up -d
-```
-
-3. Se crea contenedor `Docker` con imagenes: `Postgres` y `Rabbit`
-
-   ![](./assets/1-docker-environment.png)
-
-4. Además se crean las tablas en la BDD
-
-   ![](./assets/2-create-tables.png)
 
 # MEMO
 
