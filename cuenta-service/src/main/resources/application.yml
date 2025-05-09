@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5434/micro
+    url: jdbc:postgresql://localhost:5435/cuentasdb
     username: user
     password: pass
     driver-class-name: org.postgresql.Driver

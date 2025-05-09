@@ -1,28 +1,41 @@
 version: '3.8'
 
 services:
-  db:
+  cliente-db:
     image: postgres:15.3
-    container_name: postgres-micro
+    container_name: cliente-db
     restart: always
-    ports:
-      - "5434:5432"
     environment:
-      POSTGRES_DB: micro
+      POSTGRES_DB: clientesdb
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./db/init/BaseDatos.sql:/docker-entrypoint-initdb.d/BaseDatos.sql:ro
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "user", "-d", "micro"]
-      interval: 5s
-      retries: 5
+      - cliente-data:/var/lib/postgresql/data
+      - ./db/init/cliente/BaseDatos.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5434:5432"
+
+  cuenta-db:
+    image: postgres:15.3
+    container_name: cuenta-db
+    restart: always
+    environment:
+      POSTGRES_DB: cuentasdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - cuenta-data:/var/lib/postgresql/data
+      - ./db/init/cuenta/BaseDatos.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5435:5432"
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbit-micro
     restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: pass
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -32,4 +45,5 @@ services:
       retries: 5
 
 volumes:
-  postgres_data:
+  cliente-data:
+  cuenta-data:
