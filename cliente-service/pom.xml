@@ -104,6 +104,12 @@
       <version>1.5.5.Final</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- CODIGOS RESPUESTA HTTP -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
        
   </dependencies>
 

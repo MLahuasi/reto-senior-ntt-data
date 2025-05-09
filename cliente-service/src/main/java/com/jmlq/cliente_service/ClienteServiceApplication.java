@@ -3,7 +3,7 @@ package com.jmlq.cliente_service;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.jmlq")
 public class ClienteServiceApplication {
 
 	public static void main(String[] args) {

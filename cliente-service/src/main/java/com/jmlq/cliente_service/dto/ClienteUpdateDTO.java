@@ -7,8 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClienteUpdateDTO {
-    private Long id;
-    private String clienteId;
+    private Long personaId;
     private String contrasena;
     private Boolean estado;
 

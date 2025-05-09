@@ -7,8 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClienteReadDTO {
-    private Long id;
     private PersonaDTO persona;
-    private String clienteId;
+    private Long personaId;
     private Boolean estado;
 }

@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class Persona {
+public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;

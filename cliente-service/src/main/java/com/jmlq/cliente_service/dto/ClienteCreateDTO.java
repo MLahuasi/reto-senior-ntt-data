@@ -30,10 +30,6 @@ public class ClienteCreateDTO {
         private String telefono;
 
         @NotBlank
-        @Size(min = 6, max = 50)
-        private String clienteId;
-
-        @NotBlank
         @Size(min = 8, max = 100)
         private String contrasena;
 

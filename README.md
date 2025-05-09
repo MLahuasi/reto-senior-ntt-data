@@ -44,9 +44,9 @@ cliente-service/
 │   │   │   ├── repository/
 │   │   │   │   └── ClienteRepository.java *
 │   │   │   ├── service/
-│   │   │   │   ├── ClienteService.java (pendiente)
+│   │   │   │   ├── ClienteService.java *
 │   │   │   │   └── impl/
-│   │   │   │       └── ClienteServiceImpl.java (pendiente)
+│   │   │   │       └── ClienteServiceImpl.java *
 │   │   │   ├── event/
 │   │   │   │   ├── ClienteCreated.java (pendiente)
 │   │   │   │   ├── ClienteRead.java (pendiente)
