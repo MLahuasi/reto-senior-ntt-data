@@ -80,4 +80,11 @@ public class ClienteServiceImpl implements ClienteService {
     public void delete(Long id) {
         clienteRepository.deleteById(id);
     }
+
+    @Override
+    public ClienteResponseDTO obtenerCliente(Long id) {
+        return clienteRepository.findById(id)
+                .map(clienteMapper::toResponse)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con id: " + id));
+    }
 }

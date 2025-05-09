@@ -29,3 +29,6 @@ server:
   port: 8082
   servlet:
     context-path: /api/v1
+
+cliente-service:
+  url: http://localhost:8081

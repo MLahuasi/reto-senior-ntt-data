@@ -335,11 +335,12 @@ Las solicitudes se las realiza con: Body / raw / json
 204 No Content
 ```
 
-# MEMO
+#### SWAGGER
 
-- Ejecutar Proyecto
-
-```
-mvn clean spring-boot:run
+1. Ingresar a la url:
 
 ```
+    http://localhost:8081/api/v1/swagger-ui.html
+```
+
+![](./assets/4-swagger.png)

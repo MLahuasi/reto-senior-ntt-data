@@ -1,45 +1,32 @@
 package com.jmlq.cuenta_service.mapper;
 
-import com.jmlq.cuenta_service.dto.*;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
+import com.jmlq.cuenta_service.dto.CuentaCreateRequestDTO;
+import com.jmlq.cuenta_service.dto.CuentaResponseDTO;
 import com.jmlq.cuenta_service.model.Cuenta;
-import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface CuentaMapper {
 
-    // --- CREATE
+    // request DTO → entidad
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "numeroCuenta", target = "numeroCuenta")
-    @Mapping(source = "tipoCuenta", target = "tipoCuenta")
-    @Mapping(source = "saldoInicial", target = "saldoInicial")
-    @Mapping(source = "estado", target = "estado")
-    Cuenta toEntity(CuentaCreateDTO dto);
+    @Mapping(target = "movimientos", ignore = true)
+    Cuenta toEntity(CuentaCreateRequestDTO dto);
 
-    // --- READ
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "numeroCuenta", target = "numeroCuenta")
-    @Mapping(source = "tipoCuenta", target = "tipoCuenta")
-    @Mapping(source = "saldoInicial", target = "saldoInicial")
-    @Mapping(source = "estado", target = "estado")
-    CuentaReadDTO toReadDto(Cuenta entity);
+    // entidad → response DTO
+    // el campo clienteNombre lo rellenaremos en el service, así que lo marcamos
+    // como expresión o le ponemos ignore
+    @Mapping(target = "clienteNombre", ignore = true)
+    CuentaResponseDTO toResponse(Cuenta cuenta);
 
-    // --- UPDATE
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "numeroCuenta", target = "numeroCuenta")
-    @Mapping(source = "tipoCuenta", target = "tipoCuenta")
-    @Mapping(source = "saldoInicial", target = "saldoInicial")
-    @Mapping(source = "estado", target = "estado")
-    Cuenta toEntity(CuentaUpdateDTO dto);
-
-    // --- DELETE
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(source = "id", target = "id")
-    Cuenta toEntity(CuentaDeleteDTO dto);
-
-    // --- RESPONSE
-    @Mapping(source = "numeroCuenta", target = "numeroCuenta")
-    @Mapping(source = "tipoCuenta", target = "tipoCuenta")
-    @Mapping(source = "saldoInicial", target = "saldoInicial")
-    @Mapping(source = "estado", target = "estado")
-    CuentaResponseDTO toResponse(Cuenta entity);
+    // Para actualizar un entity si lo necesitaras
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "movimientos", ignore = true)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntityFromDto(CuentaCreateRequestDTO dto, @MappingTarget Cuenta entity);
 }

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jmlq.cliente_service.client.CuentaClient;
 import com.jmlq.cliente_service.dto.ClienteCreateDTO;
 import com.jmlq.cliente_service.dto.ClienteReadDTO;
 import com.jmlq.cliente_service.dto.ClienteResponseDTO;
 import com.jmlq.cliente_service.dto.ClienteUpdateDTO;
+import com.jmlq.cliente_service.dto.CuentaDTO;
 import com.jmlq.cliente_service.service.ClienteService;
 
 @RestController
@@ -24,9 +26,11 @@ import com.jmlq.cliente_service.service.ClienteService;
 public class ClienteController {
 
     private final ClienteService clienteService;
+    private final CuentaClient cuentaClient;
 
-    public ClienteController(ClienteService clienteService) {
+    public ClienteController(ClienteService clienteService, CuentaClient cuentaClient) {
         this.clienteService = clienteService;
+        this.cuentaClient = cuentaClient;
     }
 
     @PostMapping
@@ -57,5 +61,13 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         clienteService.delete(id);
+    }
+
+    @GetMapping("/{id}/cuentas")
+    public List<CuentaDTO> obtenerCuentasDeCliente(@PathVariable Long id) {
+        // primero podrías validar que el cliente exista:
+        clienteService.obtenerCliente(id);
+        // luego delegas la llamada a cuenta-service
+        return cuentaClient.getCuentasPorCliente(id);
     }
 }
