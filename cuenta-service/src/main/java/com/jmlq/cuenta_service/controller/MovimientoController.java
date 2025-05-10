@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jmlq.cuenta_service.dto.CuentaReadDTO;
 import com.jmlq.cuenta_service.dto.MovimientoCreateDTO;
 import com.jmlq.cuenta_service.dto.MovimientoReadDTO;
 import com.jmlq.cuenta_service.dto.MovimientoUpdateDTO;

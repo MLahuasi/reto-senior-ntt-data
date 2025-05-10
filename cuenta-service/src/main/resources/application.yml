@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: cuenta-service
+
   datasource:
     url: jdbc:postgresql://localhost:5435/cuentasdb
     username: user
@@ -7,17 +10,16 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # "validate" o "update" en desarrollo
+      ddl-auto: update
     show-sql: true
-
     properties:
-      "hibernate.format_sql": true
+      hibernate.format_sql: true
 
   rabbitmq:
     host: localhost
     port: 5672
-    username: guest
-    password: guest
+    username: user
+    password: pass
 
   flyway:
     enabled: false
@@ -30,9 +32,19 @@ server:
 cliente-service:
   url: http://localhost:8081
 
-# SpringDoc (Swagger) — opcional, pero muy útil para probar tu API
 springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+# ——————————————————————————————
+# Propiedades custom para RabbitConfig y CuentaListener
+rabbitmq:
+  exchange:
+    cliente: cliente.exchange
+  queue:
+    clienteCreated: cliente.created.queue
+  routingkey:
+    cliente:
+      created: cliente.created

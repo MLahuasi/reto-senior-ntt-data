@@ -1,10 +1,13 @@
 package com.jmlq.cuenta_service.service.Impl;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jmlq.cuenta_service.dto.CuentaCreateDTO;
 import com.jmlq.cuenta_service.dto.CuentaReadDTO;
@@ -27,6 +30,7 @@ public class CuentaServiceImpl implements CuentaService {
         cuenta.setTipoCuenta(dto.getTipo());
         cuenta.setSaldoInicial(dto.getSaldoInicial());
         cuenta.setEstado(dto.getEstado());
+        cuenta.setClienteId(dto.getClienteId());
         Cuenta guardada = cuentaRepository.save(cuenta);
         return mapToReadDTO(guardada);
     }
@@ -65,6 +69,30 @@ public class CuentaServiceImpl implements CuentaService {
         // lo guardamos
         Cuenta actualizada = cuentaRepository.save(cuenta);
         return mapToReadDTO(actualizada);
+    }
+
+    @Override
+    @Transactional
+    public void createDefaultAccountForClient(Long clienteId) {
+        // Preparamos DTO con valores iniciales
+        CuentaCreateDTO dto = new CuentaCreateDTO();
+        dto.setClienteId(clienteId);
+        dto.setTipo("Corriente");
+        dto.setSaldoInicial(BigDecimal.ZERO);
+
+        // <<< Generación de un número de cuenta único >>>
+        // Por ejemplo, un UUID sin guiones o cualquier otro formato que uses:
+        String numeroCuenta = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+        dto.setNumeroCuenta(numeroCuenta);
+
+        // Imprime todo el objeto dto como un String para que se vean todos los valores
+        System.out.println("createDefaultAccountForClient CuentaCreateDTO :  clienteId:" + dto.getClienteId() +
+                " tipo:" + dto.getTipo() +
+                " saldoInicial:" + dto.getSaldoInicial() +
+                " numeroCuenta:" + dto.getNumeroCuenta());
+
+        // Persistimos la cuenta
+        this.create(dto);
     }
 
     private CuentaReadDTO mapToReadDTO(Cuenta cuenta) {

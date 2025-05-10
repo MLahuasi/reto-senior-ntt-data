@@ -3,6 +3,8 @@ package com.jmlq.cliente_service.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.jmlq.cliente_service.dto.ClienteCreateDTO;
 import com.jmlq.cliente_service.dto.ClienteReadDTO;
 import com.jmlq.cliente_service.dto.ClienteResponseDTO;
 import com.jmlq.cliente_service.dto.ClienteUpdateDTO;
+import com.jmlq.cliente_service.event.ClienteCreatedEvent;
 import com.jmlq.cliente_service.mapper.ClienteMapper;
 import com.jmlq.cliente_service.model.Cliente;
 import com.jmlq.cliente_service.repository.ClienteRepository;
@@ -22,14 +25,21 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ClienteServiceImpl implements ClienteService {
 
+    private final RabbitTemplate rabbitTemplate;
     private final ClienteRepository clienteRepository;
     private final ClienteMapper clienteMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    @Value("${rabbitmq.exchange.cliente}")
+    private String exchange;
+    @Value("${rabbitmq.routingkey.cliente.created}")
+    private String routingKey;
+
     public ClienteServiceImpl(ClienteRepository clienteRepository,
-            ClienteMapper clienteMapper) {
+            ClienteMapper clienteMapper, RabbitTemplate rabbitTemplate) {
         this.clienteRepository = clienteRepository;
         this.clienteMapper = clienteMapper;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Override
@@ -43,7 +53,12 @@ public class ClienteServiceImpl implements ClienteService {
         // 2) Guardar Cliente; Hibernate insertará en persona y luego en cliente
         Cliente saved = clienteRepository.save(cliente);
 
-        // 3) Mapear entidad guardada → DTO de respuesta
+        // 3) Publicar evento asincrónico notificando creación
+        System.out.println("Cliente creado con id: " + saved.getId());
+        ClienteCreatedEvent event = new ClienteCreatedEvent(saved.getId());
+        rabbitTemplate.convertAndSend(exchange, routingKey, event);
+
+        // 4) Mapear entidad guardada → DTO de respuesta
         return clienteMapper.toResponse(saved);
     }
 

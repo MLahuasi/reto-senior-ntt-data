@@ -16,4 +16,6 @@ public interface CuentaService {
     void delete(Long id);
 
     CuentaReadDTO update(CuentaUpdateDTO dto);
+
+    void createDefaultAccountForClient(Long clienteId);
 }

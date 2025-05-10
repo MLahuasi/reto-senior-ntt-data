@@ -23,6 +23,9 @@ public class CuentaCreateDTO {
     @NotBlank(message = "El estado de la cuenta es obligatorio")
     private Boolean estado;
 
+    @NotBlank(message = "El clienteId de la cuenta es obligatorio")
+    private Long clienteId;
+
     // Getters y setters
     public String getNumeroCuenta() {
         return numeroCuenta;
@@ -54,5 +57,13 @@ public class CuentaCreateDTO {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Long getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
     }
 }
