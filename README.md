@@ -140,193 +140,9 @@ cuenta-service/
 
 ## EJECUTAR PROYECTOS
 
-### cliente-service
+#### [Ejecutar cliente-service](./cliente-service/README.md)
 
-1. Ingresar al directorio [cliente-service](./cliente-service/) por consola
-2. Ejecutar
-
-```
-    mvn clean spring-boot:run
-```
-
-### cuenta-service
-
-1. Ingresar al directorio [cuenta-service](./cuenta-service/) por consola
-2. Ejecutar
-
-```
-    mvn clean spring-boot:run
-```
-
-## ENDPOINTS
-
-Para las pruebas se uso Postman.
-Las solicitudes se las realiza con: Body / raw / json
-
-![](./assets/3-postman.png)
-
-### Cliente-Service
-
-> - **POST**: http://localhost:8081/api/v1/clientes
-
-> > - Request:
-
-```
-{
-  "nombre":"Marianela Montalvo",
-  "genero":"F",
-  "edad":30,
-  "identificacion":"123456",
-  "direccion":"Amazonas y NNUU",
-  "telefono":"097548965",
-  "contrasena":"5678",
-  "estado":true
-}
-```
-
-> > - Response:
-
-```
-{
-    "persona": {
-        "id": 6,
-        "nombre": "Marianela Montalvo",
-        "genero": "F",
-        "edad": 30,
-        "identificacion": "123456",
-        "direccion": "Amazonas y NNUU",
-        "telefono": "097548965"
-    },
-    "personaId": null,
-    "estado": true
-}
-```
-
-> - **GET (All)**: http://localhost:8081/api/v1/clientes
-
-> > - Request:
-
-```
-
-```
-
-> > - Response:
-
-```
-[
-    {
-        "persona": {
-            "id": 5,
-            "nombre": "Jose Lema",
-            "genero": "M",
-            "edad": 30,
-            "identificacion": null,
-            "direccion": null,
-            "telefono": null
-        },
-        "personaId": null,
-        "estado": null
-    },
-    {
-        "persona": {
-            "id": 6,
-            "nombre": "Marianela Montalvo",
-            "genero": "F",
-            "edad": 30,
-            "identificacion": null,
-            "direccion": null,
-            "telefono": null
-        },
-        "personaId": null,
-        "estado": null
-    }
-]
-```
-
-> - **GET (BY ID)**: http://localhost:8081/api/v1/clientes/6 (id)
-
-> > - Request:
-
-```
-
-```
-
-> > - Response:
-
-```
-{
-    "persona": {
-        "id": 6,
-        "nombre": "Marianela Montalvo",
-        "genero": "F",
-        "edad": 30,
-        "identificacion": "123456",
-        "direccion": "Amazonas y NNUU",
-        "telefono": "097548965"
-    },
-    "personaId": null,
-    "estado": true
-}
-```
-
-> - **PUT**: http://localhost:8081/api/v1/clientes/6 (id)
-
-> > - Request:
-
-```
-{
-  "nombre":"Marianela Montalvo",
-  "genero":"F",
-  "edad":25,
-  "identificacion":"785496",
-  "direccion":"Amazonas y NNUU",
-  "telefono":"097548965",
-  "contrasena":"5678",
-  "estado":true
-}
-```
-
-> > - Response:
-
-```
-{
-    "persona": {
-        "id": 6,
-        "nombre": "Marianela Montalvo",
-        "genero": "F",
-        "edad": 25,
-        "identificacion": "785496",
-        "direccion": "Amazonas y NNUU",
-        "telefono": "097548965"
-    },
-    "personaId": null,
-    "estado": true
-}
-```
-
-> - **DELETE**: http://localhost:8081/api/v1/clientes/5 (id)
-
-> > - Request:
-
-```
-
-```
-
-> > - Response:
-
-```
-204 No Content
-```
-
-#### SWAGGER
-
-1. Ingresar a la url:
-
-```
-    http://localhost:8081/api/v1/swagger-ui.html
-```
-
-![](./assets/4-swagger.png)
+#### [Ejecutar cuenta-service](./cuenta-service/README.md)
 
 ## STATUS DESARROLLO
 
@@ -350,10 +166,9 @@ Las solicitudes se las realiza con: Body / raw / json
 | Cliente-Service     | Pruebas unitarias (servicio + controlador)                             |  (p)   |
 | Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)                  |  (p)   |
 | Cliente-Service     | Perfil de pruebas (`application-test.yml`)                             |  (p)   |
-| Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                    |  (p)   |
-| Cliente-Service     | Manejador global de excepciones (`@ControllerAdvice`)                  |  (p)   |
-| **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                               |  (p)   |
-| Cuenta-Service      | CRUD de movimientos (POST, GET)                                        |  (p)   |
+| Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                    |   \*   |
+| **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                               |   \*   |
+| Cuenta-Service      | CRUD de movimientos (POST, GET)                                        |   \*   |
 | Cuenta-Service      | Mapear DTO ↔ Entidad (`CuentaCreateDTO`, `MovimientoReadDTO`…)         |   \*   |
 | Cuenta-Service      | Repositorios JPA (`CuentaRepository`, `MovimientoRepository`)          |   \*   |
 | Cuenta-Service      | Persistencia con Spring Data JPA y PostgreSQL                          |   \*   |
@@ -364,12 +179,11 @@ Las solicitudes se las realiza con: Body / raw / json
 | Cuenta-Service      | Definición de eventos (`CuentaCreatedEvent`, `MovimientoCreatedEvent`) |  (p)   |
 | Cuenta-Service      | Publicación de eventos al crear cuenta/movimiento                      |  (p)   |
 | Cuenta-Service      | Consumo de eventos con `@RabbitListener`                               |  (p)   |
-| Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones    |  (p)   |
-| Cuenta-Service      | Controller REST (`CuentaController`)                                   |  (p)   |
-| Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                                  |  (p)   |
+| Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones    |   \*   |
+| Cuenta-Service      | Controller REST (`CuentaController`)                                   |   \*   |
+| Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                                  |   \*   |
 | Cuenta-Service      | Pruebas unitarias (servicio + controlador)                             |  (p)   |
 | Cuenta-Service      | Pruebas de integración (Testcontainers o BD embebida)                  |  (p)   |
 | Cuenta-Service      | Perfil de pruebas (`application-test.yml`)                             |  (p)   |
-| Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                    |  (p)   |
-| Cuenta-Service      | Manejador global de excepciones (`@ControllerAdvice`)                  |  (p)   |
-| Cuenta-Service      | README específico del servicio                                         |  (p)   |
+| Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                    |   \*   |
+| Cuenta-Service      | README específico del servicio                                         |   \*   |

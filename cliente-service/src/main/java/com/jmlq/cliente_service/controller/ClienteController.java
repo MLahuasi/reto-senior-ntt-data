@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jmlq.cliente_service.client.CuentaClient;
+import com.jmlq.cliente_service.client.CuentaCliente;
 import com.jmlq.cliente_service.dto.ClienteCreateDTO;
 import com.jmlq.cliente_service.dto.ClienteReadDTO;
 import com.jmlq.cliente_service.dto.ClienteResponseDTO;
@@ -21,21 +21,23 @@ import com.jmlq.cliente_service.dto.ClienteUpdateDTO;
 import com.jmlq.cliente_service.dto.CuentaDTO;
 import com.jmlq.cliente_service.service.ClienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
     private final ClienteService clienteService;
-    private final CuentaClient cuentaClient;
+    private final CuentaCliente cuentaCliente;
 
-    public ClienteController(ClienteService clienteService, CuentaClient cuentaClient) {
+    public ClienteController(ClienteService clienteService, CuentaCliente cuentaClient) {
         this.clienteService = clienteService;
-        this.cuentaClient = cuentaClient;
+        this.cuentaCliente = cuentaClient;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClienteResponseDTO create(@RequestBody ClienteCreateDTO dto) {
+    public ClienteResponseDTO create(@Valid @RequestBody ClienteCreateDTO dto) {
         return clienteService.create(dto);
     }
 
@@ -52,7 +54,7 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ClienteResponseDTO update(
             @PathVariable Long id,
-            @RequestBody ClienteUpdateDTO dto) {
+            @Valid @RequestBody ClienteUpdateDTO dto) {
         dto.setPersonaId(id); // asegúrate de propagar el id
         return clienteService.update(dto);
     }
@@ -64,10 +66,10 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}/cuentas")
-    public List<CuentaDTO> obtenerCuentasDeCliente(@PathVariable Long id) {
+    public List<CuentaDTO> getCuentasByCliente(@PathVariable Long id) {
         // primero podrías validar que el cliente exista:
-        clienteService.obtenerCliente(id);
+        clienteService.findById(id);
         // luego delegas la llamada a cuenta-service
-        return cuentaClient.getCuentasPorCliente(id);
+        return cuentaCliente.getCuentasByCliente(id);
     }
 }

@@ -15,10 +15,9 @@ import lombok.*;
 @NoArgsConstructor
 public class Cliente extends Persona {
 
-    /** Contraseña en texto cifrado */
+    @Column(nullable = false)
     private String contrasena;
 
-    /** Estado activo/inactivo */
+    @Column(nullable = false)
     private Boolean estado;
-
 }

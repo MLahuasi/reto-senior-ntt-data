@@ -3,6 +3,7 @@ package com.jmlq.cliente_service.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jmlq.cliente_service.dto.ClienteCreateDTO;
@@ -23,6 +24,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository clienteRepository;
     private final ClienteMapper clienteMapper;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public ClienteServiceImpl(ClienteRepository clienteRepository,
             ClienteMapper clienteMapper) {
@@ -34,6 +36,8 @@ public class ClienteServiceImpl implements ClienteService {
     public ClienteResponseDTO create(ClienteCreateDTO dto) {
         // 1) Mapear DTO → entidad Cliente (incluye campos de Persona gracias a
         // herencia)
+        // Encriptar la contraseña antes de guardar
+        dto.setContrasena(passwordEncoder.encode(dto.getContrasena()));
         Cliente cliente = clienteMapper.toEntity(dto);
 
         // 2) Guardar Cliente; Hibernate insertará en persona y luego en cliente
@@ -67,6 +71,7 @@ public class ClienteServiceImpl implements ClienteService {
         // 2) Copiar los campos del DTO sobre la entidad recuperada
         // Para esto puedes usar MapStruct con un método @BeanMapping(ignoreNull =
         // true):
+        dto.setContrasena(passwordEncoder.encode(dto.getContrasena()));
         clienteMapper.updateEntityFromDto(dto, existing);
 
         // 3) Guardar (Hibernate hace UPDATE porque existing.id != null)
@@ -79,12 +84,5 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void delete(Long id) {
         clienteRepository.deleteById(id);
-    }
-
-    @Override
-    public ClienteResponseDTO obtenerCliente(Long id) {
-        return clienteRepository.findById(id)
-                .map(clienteMapper::toResponse)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con id: " + id));
     }
 }

@@ -23,7 +23,7 @@
 
   <properties>
     <java.version>17</java.version>
-    <lombok.version>1.18.28</lombok.version>
+    <lombok.version>1.18.26</lombok.version>
     <mapstruct.version>1.5.5.Final</mapstruct.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <surefire-plugin.version>3.0.0-M8</surefire-plugin.version>
@@ -42,7 +42,7 @@
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
-    <!-- Bean Validation -->
+    <!-- Bean Validation: Hibernate Validator bajo JSR-380 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
@@ -61,11 +61,6 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- Flyway DB migrations -->
-    <!-- <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-    </dependency> -->
 
     <!-- Lombok (compile-time only) -->
     <dependency>
@@ -88,12 +83,19 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- OpenAPI / Swagger UI -->
+    <!-- Swagger UI Starter (único starter, versión compatible con Spring 6.2.6) -->
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.1.0</version>
+      <version>2.0.2</version>  
     </dependency>
+
+    <!-- ENCRIPTAR -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+    </dependency>
+  
 
     <!-- Testing -->
     <dependency>
@@ -111,6 +113,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
+          <source>17</source>
+          <target>17</target>
           <release>${java.version}</release>
           <annotationProcessorPaths>
             <path>

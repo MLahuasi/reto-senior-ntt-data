@@ -17,26 +17,22 @@ import com.jmlq.cliente_service.model.Cliente;
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
 
-    // --- CREATE
-    @Mapping(target = "id", ignore = true) // ID lo genera la BD
+    // CREATE
+    @Mapping(target = "id", ignore = true)
     Cliente toEntity(ClienteCreateDTO dto);
 
-    @BeanMapping(ignoreByDefault = true)
-    Cliente toEntityUpdate(ClienteUpdateDTO dto);
-
-    // método para aplicar cambios parciales sobre la entidad existente
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "id", ignore = true)
-    void updateEntityFromDto(ClienteUpdateDTO dto, @MappingTarget Cliente cliente);
-
-    // --- READ plano
+    // READ
     @BeanMapping(ignoreByDefault = true)
     @Mapping(source = "id", target = "persona.id")
     @Mapping(source = "nombre", target = "persona.nombre")
     @Mapping(source = "genero", target = "persona.genero")
     @Mapping(source = "edad", target = "persona.edad")
-    // …otros campos heredados
     ClienteReadDTO toReadDto(Cliente cliente);
+
+    // UPDATE
+    @Mapping(source = "personaId", target = "id")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntityFromDto(ClienteUpdateDTO dto, @MappingTarget Cliente cliente);
 
     // --- RESPONSE con sub-dto persona
     @BeanMapping(ignoreByDefault = true)

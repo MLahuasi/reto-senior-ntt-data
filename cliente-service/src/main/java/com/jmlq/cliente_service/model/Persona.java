@@ -3,10 +3,6 @@ package com.jmlq.cliente_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidad base para datos de persona.
- * Se mapea a la tabla “persona” con herencia JOINED.
- */
 @Entity
 @Table(name = "persona")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -15,26 +11,25 @@ import lombok.*;
 @NoArgsConstructor
 public class Persona {
 
-    /** PK generado automáticamente */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    /** Nombre completo de la persona */
+    @Column(nullable = false)
     protected String nombre;
 
-    /** Género (M/F/u otro) */
+    @Column(nullable = false)
     protected String genero;
 
-    /** Edad en años */
+    @Column(nullable = false)
     protected Integer edad;
 
-    /** Documento de identificación */
+    @Column(nullable = false, unique = true)
     protected String identificacion;
 
-    /** Dirección postal */
+    @Column(nullable = false)
     protected String direccion;
 
-    /** Teléfono de contacto */
+    @Column(nullable = false)
     protected String telefono;
 }

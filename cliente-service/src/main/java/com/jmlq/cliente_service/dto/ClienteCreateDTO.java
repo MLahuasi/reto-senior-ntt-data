@@ -8,31 +8,30 @@ import lombok.*;
 @AllArgsConstructor
 public class ClienteCreateDTO {
 
-        @NotBlank
-        @Size(max = 100)
+        @NotBlank(message = "El nombre es obligatorio")
         private String nombre;
 
-        @NotBlank
-        @Pattern(regexp = "M|F")
+        @NotBlank(message = "El género es obligatorio")
+        @Pattern(regexp = "M|F", message = "El género debe ser 'M' o 'F'")
         private String genero;
 
-        @NotNull
-        @Min(0)
+        @NotNull(message = "La edad es obligatoria")
+        @Min(value = 0, message = "La edad debe ser 0 o mayor")
         private Integer edad;
 
-        @NotBlank
+        @NotBlank(message = "La identificación es obligatoria")
         private String identificacion;
 
-        @NotBlank
+        @NotBlank(message = "La dirección es obligatoria")
         private String direccion;
 
-        @NotBlank
+        @NotBlank(message = "El teléfono es obligatorio")
         private String telefono;
 
-        @NotBlank
-        @Size(min = 8, max = 100)
+        @NotBlank(message = "La contraseña es obligatoria")
+        @Size(min = 4, max = 8, message = "La contraseña debe tener entre 4 y 8 caracteres")
         private String contrasena;
 
-        @NotNull
+        @NotNull(message = "El estado es obligatorio")
         private Boolean estado;
 }
