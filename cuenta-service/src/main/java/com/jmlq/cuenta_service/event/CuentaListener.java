@@ -14,15 +14,15 @@ public class CuentaListener {
     private final CuentaService cuentaService;
 
     @RabbitListener(queues = "${rabbitmq.queue.clienteCreated}", containerFactory = "rabbitListenerContainerFactory")
-    public void onClienteCreated(ClienteCreatedEvent event) {
+    public Long onClienteCreated(ClienteCreatedEvent event) {
         if (event.getClienteId() == null) {
             log.warn("Evento ignorado: clienteId nulo => {}", event);
-            return;
+            return 0L;
         }
 
         // Imprimir el evento recibido en consola
         System.out.println("Id Recibido en CuentaService: " + event.getClienteId());
 
-        cuentaService.createDefaultAccountForClient(event.getClienteId());
+        return cuentaService.createDefaultAccountForClient(event.getClienteId());
     }
 }

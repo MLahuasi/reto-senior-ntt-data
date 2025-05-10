@@ -17,5 +17,5 @@ public interface CuentaService {
 
     CuentaReadDTO update(CuentaUpdateDTO dto);
 
-    void createDefaultAccountForClient(Long clienteId);
+    Long createDefaultAccountForClient(Long clienteId);
 }

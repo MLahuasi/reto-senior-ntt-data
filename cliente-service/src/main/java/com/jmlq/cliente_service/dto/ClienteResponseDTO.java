@@ -9,4 +9,5 @@ public class ClienteResponseDTO {
         private PersonaDTO persona;
         private Long personaId;
         private Boolean estado;
+        private Long cuentaId;
 }

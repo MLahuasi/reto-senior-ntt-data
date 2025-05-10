@@ -56,10 +56,23 @@ public class ClienteServiceImpl implements ClienteService {
         // 3) Publicar evento asincrónico notificando creación
         System.out.println("Cliente creado con id: " + saved.getId());
         ClienteCreatedEvent event = new ClienteCreatedEvent(saved.getId());
-        rabbitTemplate.convertAndSend(exchange, routingKey, event);
+        // rabbitTemplate.convertAndSend(exchange, routingKey, event);
+        Object reply = rabbitTemplate.convertSendAndReceive(exchange, routingKey, event);
+        Long cuentaId = null;
+        if (reply instanceof Integer) {
+            cuentaId = ((Integer) reply).longValue();
+        } else if (reply instanceof Long) {
+            cuentaId = (Long) reply;
+        } else {
+            cuentaId = 0L;
+        }
 
         // 4) Mapear entidad guardada → DTO de respuesta
-        return clienteMapper.toResponse(saved);
+        var resp = clienteMapper.toResponse(saved);
+        resp.setCuentaId(cuentaId);
+        // imprime en consolo el id de la cuenta
+        System.out.println("Id de cuenta: " + cuentaId);
+        return resp;
     }
 
     @Override

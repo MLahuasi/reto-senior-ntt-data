@@ -16,28 +16,39 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
+    // ————————————————
+    // 1) Conversor JSON
+    // ————————————————
+    @Bean
+    public MessageConverter jsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
+    // ————————————————
+    // 2) RabbitTemplate
+    // ————————————————
+    // • MessageConverter para JSON
+    // • Se añade replyTimeout
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory cf,
+            MessageConverter jsonMessageConverter) {
+        RabbitTemplate template = new RabbitTemplate(cf);
+        // mantiene la serialización JSON de tu config original
+        template.setMessageConverter(jsonMessageConverter);
+        // NUEVO: retraso máximo en ms para recibir el reply en RPC
+        template.setReplyTimeout(10_000);
+        return template;
+    }
+
+    // ————————————————
+    // 3) Exchange / Queue / Binding
+    // ————————————————
     @Value("${rabbitmq.exchange.cliente}")
     private String exchangeName;
 
     @Value("${rabbitmq.routingkey.cliente.created}")
     private String routingKey;
 
-    // 1) Definimos un único conversor JSON
-    @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
-
-    // 2) Creamos el RabbitTemplate y lo marcamos como @Primary o único
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory cf,
-            MessageConverter jsonMessageConverter) {
-        RabbitTemplate template = new RabbitTemplate(cf);
-        template.setMessageConverter(jsonMessageConverter);
-        return template;
-    }
-
-    // 3) Exchange / Queue / Binding (idéntico a antes)
     @Bean
     public DirectExchange clienteExchange() {
         return new DirectExchange(exchangeName);

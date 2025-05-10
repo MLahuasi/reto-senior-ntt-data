@@ -73,7 +73,7 @@ public class CuentaServiceImpl implements CuentaService {
 
     @Override
     @Transactional
-    public void createDefaultAccountForClient(Long clienteId) {
+    public Long createDefaultAccountForClient(Long clienteId) {
         // Preparamos DTO con valores iniciales
         CuentaCreateDTO dto = new CuentaCreateDTO();
         dto.setClienteId(clienteId);
@@ -92,7 +92,12 @@ public class CuentaServiceImpl implements CuentaService {
                 " numeroCuenta:" + dto.getNumeroCuenta());
 
         // Persistimos la cuenta
-        this.create(dto);
+        var cuenta = this.create(dto);
+
+        // Imprimimos el ID de la cuenta creada
+        System.out.println("createDefaultAccountForClient ID de la cuenta creada: " + cuenta.getId());
+        // Retornamos el ID de la cuenta creada
+        return cuenta.getId();
     }
 
     private CuentaReadDTO mapToReadDTO(Cuenta cuenta) {

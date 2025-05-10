@@ -20,6 +20,45 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
+    // ------------------------------------------------------------
+    // 1) Bean para convertir <--> JSON usando Jackson.
+    // ------------------------------------------------------------
+    @Bean
+    public MessageConverter jackson2JsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
+    // ------------------------------------------------------------
+    // 2) Template para enviar mensajes (RPC o fire-and-forget).
+    // ------------------------------------------------------------
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory cf) {
+        RabbitTemplate tpl = new RabbitTemplate(cf);
+        tpl.setMessageConverter(jackson2JsonMessageConverter());
+        // tpl.setReplyTimeout(10000); // sólo en cliente-service, para RPC
+        return tpl;
+    }
+
+    // ------------------------------------------------------------
+    // 3) Fábrica de listeners (consumidores).
+    // ------------------------------------------------------------
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
+            ConnectionFactory cf,
+            MessageConverter converter) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(cf);
+        factory.setMessageConverter(converter);
+        // factory.setAutoStartup(false);
+        // factory.setDefaultRequeueRejected(false);
+        return factory;
+    }
+
+    // ------------------------------------------------------------
+    // 4) Exchange, Queue, Binding,
+    // RabbitAdmin y ApplicationRunner para purgar + arrancar.
+    // ------------------------------------------------------------
+
     @Value("${rabbitmq.exchange.cliente}")
     private String exchangeName;
 
@@ -28,18 +67,6 @@ public class RabbitConfig {
 
     @Value("${rabbitmq.queue.clienteCreated}")
     private String queueName;
-
-    @Bean
-    public MessageConverter jackson2JsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
-
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory cf) {
-        RabbitTemplate tpl = new RabbitTemplate(cf);
-        tpl.setMessageConverter(jackson2JsonMessageConverter());
-        return tpl;
-    }
 
     @Bean
     public DirectExchange clienteExchange() {
@@ -54,7 +81,8 @@ public class RabbitConfig {
     @Bean
     public Binding bindingClienteCreated(Queue clienteCreatedQueue,
             DirectExchange clienteExchange) {
-        return BindingBuilder.bind(clienteCreatedQueue)
+        return BindingBuilder
+                .bind(clienteCreatedQueue)
                 .to(clienteExchange)
                 .with(routingKey);
     }
@@ -64,30 +92,15 @@ public class RabbitConfig {
         return new RabbitAdmin(cf);
     }
 
-    /**
-     * 1) Purga la cola de forma SÍNCRONA (noWait=false)
-     * 2) Después arranca manualmente todos los listeners
-     */
+    // 1) Purga la cola de forma SÍNCRONA (noWait=false)
+    // 2) Después arranca manualmente todos los listeners
     @Bean
-    public ApplicationRunner purgeThenStart(
-            RabbitAdmin admin,
+    public ApplicationRunner purgeThenStart(RabbitAdmin admin,
             RabbitListenerEndpointRegistry registry) {
         return args -> {
             admin.purgeQueue(queueName, false);
             System.out.println("Cola '" + queueName + "' purgada al arranque");
             registry.getListenerContainers().forEach(c -> c.start());
         };
-    }
-
-    @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
-            ConnectionFactory cf,
-            MessageConverter converter) {
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(cf);
-        factory.setMessageConverter(converter);
-        factory.setAutoStartup(false); // NO arranque automático
-        factory.setDefaultRequeueRejected(false); // no recon encolado
-        return factory;
     }
 }
