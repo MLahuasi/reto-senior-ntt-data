@@ -146,44 +146,43 @@ cuenta-service/
 
 ## STATUS DESARROLLO
 
-| Servicio            | Funcionalidad                                                          | Estado |
-| ------------------- | ---------------------------------------------------------------------- | :----: |
-| **Cliente-Service** | CRUD de clientes (POST, GET, PUT, DELETE)                              |   \*   |
-| Cliente-Service     | Mapear DTO ↔ Entidad (`ClienteCreateDTO`, `ClienteReadDTO`…)           |   \*   |
-| Cliente-Service     | Repositorio JPA (`ClienteRepository`)                                  |   \*   |
-| Cliente-Service     | Capa de servicio (`ClienteService` + `ClienteServiceImpl`)             |   \*   |
-| Cliente-Service     | Controller REST (`ClienteController`)                                  |   \*   |
-| Cliente-Service     | Persistencia con Spring Data JPA y PostgreSQL                          |   \*   |
-| Cliente-Service     | Configuración de propiedades en `application.yml`                      |   \*   |
-| Cliente-Service     | README con instrucciones generales                                     |   \*   |
-| Cliente-Service     | Dockerfile                                                             |  (p)   |
-| Cliente-Service     | `.dockerignore`                                                        |  (p)   |
-| Cliente-Service     | Configuración RabbitMQ (`RabbitConfig`)                                |  (p)   |
-| Cliente-Service     | Definición de eventos (ej. `ClienteCreatedEvent`)                      |  (p)   |
-| Cliente-Service     | Publicación de eventos al crear/actualizar cliente                     |  (p)   |
-| Cliente-Service     | Consumo de eventos con `@RabbitListener`                               |  (p)   |
-| Cliente-Service     | Swagger/OpenAPI (`springdoc-openapi`)                                  |   \*   |
-| Cliente-Service     | Pruebas unitarias (servicio + controlador)                             |  (p)   |
-| Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)                  |  (p)   |
-| Cliente-Service     | Perfil de pruebas (`application-test.yml`)                             |  (p)   |
-| Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                    |   \*   |
-| **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                               |   \*   |
-| Cuenta-Service      | CRUD de movimientos (POST, GET)                                        |   \*   |
-| Cuenta-Service      | Mapear DTO ↔ Entidad (`CuentaCreateDTO`, `MovimientoReadDTO`…)         |   \*   |
-| Cuenta-Service      | Repositorios JPA (`CuentaRepository`, `MovimientoRepository`)          |   \*   |
-| Cuenta-Service      | Persistencia con Spring Data JPA y PostgreSQL                          |   \*   |
-| Cuenta-Service      | Configuración de propiedades en `application.yml`                      |   \*   |
-| Cuenta-Service      | Dockerfile                                                             |  (p)   |
-| Cuenta-Service      | `.dockerignore`                                                        |  (p)   |
-| Cuenta-Service      | Configuración RabbitMQ (`RabbitConfig`)                                |  (p)   |
-| Cuenta-Service      | Definición de eventos (`CuentaCreatedEvent`, `MovimientoCreatedEvent`) |  (p)   |
-| Cuenta-Service      | Publicación de eventos al crear cuenta/movimiento                      |  (p)   |
-| Cuenta-Service      | Consumo de eventos con `@RabbitListener`                               |  (p)   |
-| Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones    |   \*   |
-| Cuenta-Service      | Controller REST (`CuentaController`)                                   |   \*   |
-| Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                                  |   \*   |
-| Cuenta-Service      | Pruebas unitarias (servicio + controlador)                             |  (p)   |
-| Cuenta-Service      | Pruebas de integración (Testcontainers o BD embebida)                  |  (p)   |
-| Cuenta-Service      | Perfil de pruebas (`application-test.yml`)                             |  (p)   |
-| Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                    |   \*   |
-| Cuenta-Service      | README específico del servicio                                         |   \*   |
+| Servicio            | Funcionalidad                                                       | Estado |
+| ------------------- | ------------------------------------------------------------------- | :----: |
+| **Cliente-Service** | CRUD de clientes (POST, GET, PUT, DELETE)                           |   \*   |
+| Cliente-Service     | Mapear DTO ↔ Entidad (`ClienteCreateDTO`, `ClienteReadDTO`…)        |   \*   |
+| Cliente-Service     | Repositorio JPA (`ClienteRepository`)                               |   \*   |
+| Cliente-Service     | Capa de servicio (`ClienteService` + `ClienteServiceImpl`)          |   \*   |
+| Cliente-Service     | Controller REST (`ClienteController`)                               |   \*   |
+| Cliente-Service     | Persistencia con Spring Data JPA y PostgreSQL                       |   \*   |
+| Cliente-Service     | Configuración de propiedades en `application.yml`                   |   \*   |
+| Cliente-Service     | README con instrucciones generales                                  |   \*   |
+| Cliente-Service     | Dockerfile                                                          |  (p)   |
+| Cliente-Service     | `.dockerignore`                                                     |  (p)   |
+| Cliente-Service     | Configuración RabbitMQ (`RabbitConfig`)                             |   \*   |
+| Cliente-Service     | Definición de eventos (ej. `ClienteCreatedEvent`)                   |   \*   |
+| Cliente-Service     | Publicación de eventos al crear                                     |   \*   |
+| Cliente-Service     | Consumo de eventos con `@RabbitListener`                            |   \*   |
+| Cliente-Service     | Swagger/OpenAPI (`springdoc-openapi`)                               |   \*   |
+| Cliente-Service     | Pruebas unitarias (servicio + controlador)                          |  (p)   |
+| Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)               |  (p)   |
+| Cliente-Service     | Perfil de pruebas (`application-test.yml`)                          |  (p)   |
+| Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
+| **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                            |   \*   |
+| Cuenta-Service      | CRUD de movimientos (POST, GET)                                     |   \*   |
+| Cuenta-Service      | Mapear DTO ↔ Entidad (`CuentaCreateDTO`, `MovimientoReadDTO`…)      |   \*   |
+| Cuenta-Service      | Repositorios JPA (`CuentaRepository`, `MovimientoRepository`)       |   \*   |
+| Cuenta-Service      | Persistencia con Spring Data JPA y PostgreSQL                       |   \*   |
+| Cuenta-Service      | Configuración de propiedades en `application.yml`                   |   \*   |
+| Cuenta-Service      | Dockerfile                                                          |  (p)   |
+| Cuenta-Service      | `.dockerignore`                                                     |  (p)   |
+| Cuenta-Service      | Configuración RabbitMQ (`RabbitConfig`)                             |   \*   |
+| Cuenta-Service      | Definición de eventos (`ClienteCreatedEvent`)                       |   \*   |
+| Cuenta-Service      | Consumo de eventos con `@RabbitListener`                            |   \*   |
+| Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones |   \*   |
+| Cuenta-Service      | Controller REST (`CuentaController`)                                |   \*   |
+| Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                               |   \*   |
+| Cuenta-Service      | Pruebas unitarias (servicio + controlador)                          |  (p)   |
+| Cuenta-Service      | Pruebas de integración (Testcontainers o BD embebida)               |  (p)   |
+| Cuenta-Service      | Perfil de pruebas (`application-test.yml`)                          |  (p)   |
+| Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
+| Cuenta-Service      | README específico del servicio                                      |   \*   |
