@@ -189,6 +189,36 @@ cuenta-service/
 
 # FUNCIONES
 
+## COMUNICACION ASYNC
+
+Como no se especificó en el documento técnico como debía ser implementado el proceso `async` usando `Rabbit`, se implementó lo siguiente:
+
+Cuando se crea un `Cliente` (cliente-service) envía `ClienteId`, `NumeoCuenta`, `SaldoInicial`, `TipoCuenta` hacia `Cuenta` (cuenta-service) mendiante `Rabbit`.
+Una vez que se inserta la `Cuenta` (cuenta-service) se envía `Cliente` (cliente-service) `CuentaId`
+
+```
+                                     Rabbit
+
+
+                                    ClienteId
+                                    NumeoCuenta
+                                    SaldoInicial
+                                    TipoCuenta
+                                ------------------>
+            Cliente (Create)                           Cuenta
+                                <------------------
+                                    CuentaId
+
+```
+
+Ejecutar:
+
+**POST**
+
+```
+    http://localhost:8081/api/v1/clientes
+```
+
 ## F1 CRUD
 
 ## F2 y F3 (Registro de movimientos y Alerta “Saldo no disponible”)
