@@ -163,9 +163,8 @@ cuenta-service/
 | Cliente-Service     | Publicación de eventos al crear                                     |   \*   |
 | Cliente-Service     | Consumo de eventos con `@RabbitListener`                            |   \*   |
 | Cliente-Service     | Swagger/OpenAPI (`springdoc-openapi`)                               |   \*   |
-| Cliente-Service     | Pruebas unitarias (servicio + controlador)                          |  (p)   |
-| Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)               |  (p)   |
-| Cliente-Service     | Perfil de pruebas (`application-test.yml`)                          |  (p)   |
+| Cliente-Service     | Pruebas unitarias (servicio + controlador)                          |   \*   |
+| Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)               |   \*   |
 | Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
 | **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                            |   \*   |
 | Cuenta-Service      | CRUD de movimientos (POST, GET)                                     |   \*   |
@@ -181,9 +180,6 @@ cuenta-service/
 | Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones |   \*   |
 | Cuenta-Service      | Controller REST (`CuentaController`)                                |   \*   |
 | Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                               |   \*   |
-| Cuenta-Service      | Pruebas unitarias (servicio + controlador)                          |  (p)   |
-| Cuenta-Service      | Pruebas de integración (Testcontainers o BD embebida)               |  (p)   |
-| Cuenta-Service      | Perfil de pruebas (`application-test.yml`)                          |  (p)   |
 | Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
 | Cuenta-Service      | README específico del servicio                                      |   \*   |
 
@@ -240,3 +236,49 @@ Ejecutar:
 ```
 
 ![](./assets/7-F4-EstadoCuenta.png)
+
+## F5 - Pruebas unitarias: Implementar 1 prueba unitaria para la entidad de dominio Cliente
+
+[ClienteTest](./cliente-service/src/test/java/com/jmlq/cliente_service/model/ClienteTest.java)
+
+![](./assets/8-F5-PruebaUnitaria.png)
+
+## F6 - Pruebas de Integración: Implementar 1 prueba de integración
+
+[](./cliente-service/src/test/java/com/jmlq/cliente_service/ClienteIntegrationTest.java)
+
+![](./assets/9-F6-PruebaIntegracion.png)
+
+## F8 - Realizar la documentación con Swagger mediante OpenAPI
+
+**NOTA**: Se presentó alguna incompatiblidad con la dependencia que produce un error que se expone con el contról centralizado de Exceptions [GlobalExceptionHandler](./cliente-service/src/main/java/com/jmlq/cliente_service/exception/GlobalExceptionHandler.java).
+
+```
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+```
+
+La clase `GlobalExceptionHandler` también permite capturar las excepciones que se generan en las validaciones de los DTOs, por lo que opté por controlar la exception que se produce con Swagger y no sacrificar la visualización de mensajes de error personalizado.
+
+### SWAGGER sin control de Exceptions
+
+**Cliente-Service**: http://localhost:8081/api/v1/swagger-ui.html
+
+![](./assets/4-swagger.png)
+
+**Cuenta-Service**: http://localhost:8082/api/v1/swagger-ui.html
+
+![](./assets/5-swagger.png)
+
+### SWAGGER con control de Exceptions
+
+**Cliente-Service**: http://localhost:8081/api/v1/swagger-ui.html
+
+![](./assets/4-1-swagger.png)
+
+**Cuenta-Service**: http://localhost:8082/api/v1/swagger-ui.html
+
+![](./assets/5-1-swagger.png)
