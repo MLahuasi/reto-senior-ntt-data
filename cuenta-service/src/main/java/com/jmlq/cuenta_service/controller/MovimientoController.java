@@ -20,7 +20,7 @@ import com.jmlq.cuenta_service.dto.MovimientoReadDTO;
 import com.jmlq.cuenta_service.dto.MovimientoUpdateDTO;
 import com.jmlq.cuenta_service.service.MovimientoService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @RestController
@@ -31,12 +31,15 @@ public class MovimientoController {
     @Autowired
     private MovimientoService movimientoService;
 
+    // F2: Registro de movimientos
+    // F1: CRUDs
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MovimientoReadDTO create(@Valid @RequestBody MovimientoCreateDTO dto) {
         return movimientoService.create(dto);
     }
 
+    // F1: CRUDs
     @PutMapping("/{id}")
     public MovimientoReadDTO update(
             @PathVariable Long id,
@@ -45,6 +48,7 @@ public class MovimientoController {
         return movimientoService.update(dto);
     }
 
+    // F1: CRUDs
     @GetMapping("/{id}")
     public MovimientoReadDTO getById(@PathVariable Long id) {
         return movimientoService.getById(id);
@@ -55,14 +59,11 @@ public class MovimientoController {
         return movimientoService.getAll();
     }
 
+    // F1: CRUDs
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         movimientoService.delete(id);
     }
 
-    @GetMapping("/cuenta/{cuentaId}")
-    public List<MovimientoReadDTO> getByCuenta(@PathVariable Long cuentaId) {
-        return movimientoService.getByCuenta(cuentaId);
-    }
 }

@@ -17,6 +17,4 @@ public interface MovimientoService {
 
     // ← nuevo
     MovimientoReadDTO update(MovimientoUpdateDTO dto);
-
-    List<MovimientoReadDTO> getByCuenta(Long cuentaId);
 }

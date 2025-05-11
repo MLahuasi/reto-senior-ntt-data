@@ -1,5 +1,7 @@
 package com.jmlq.cliente_service.dto;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -34,4 +36,15 @@ public class ClienteCreateDTO {
 
         @NotNull(message = "El estado es obligatorio")
         private Boolean estado;
+
+        @NotNull(message = "El saldoInicial es obligatoria")
+        @Min(value = 0, message = "El saldoInicial debe ser 0 o mayor")
+        private BigDecimal saldoInicial;
+
+        @NotBlank(message = "El numeroCuenta es obligatorio")
+        private String numeroCuenta;
+
+        @NotNull(message = "El tipoCuenta es obligatorio")
+        @Pattern(regexp = "AHORRO|CORRIENTE", message = "El tipo de cuenta debe ser 'AHORRO' o 'CORRIENTE'")
+        private String tipoCuenta;
 }

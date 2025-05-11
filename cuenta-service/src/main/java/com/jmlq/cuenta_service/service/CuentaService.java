@@ -1,5 +1,6 @@
 package com.jmlq.cuenta_service.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.jmlq.cuenta_service.dto.CuentaCreateDTO;
@@ -17,5 +18,5 @@ public interface CuentaService {
 
     CuentaReadDTO update(CuentaUpdateDTO dto);
 
-    Long createDefaultAccountForClient(Long clienteId);
+    Long createDefaultAccountForClient(Long clienteId, String numeroCuenta, BigDecimal saldoInicial, String tipoCuenta);
 }

@@ -23,6 +23,7 @@ public class CuentaListener {
         // Imprimir el evento recibido en consola
         System.out.println("Id Recibido en CuentaService: " + event.getClienteId());
 
-        return cuentaService.createDefaultAccountForClient(event.getClienteId());
+        return cuentaService.createDefaultAccountForClient(event.getClienteId(), event.getNumeroCuenta(),
+                event.getSaldoInicial(), event.getTipoCuenta());
     }
 }

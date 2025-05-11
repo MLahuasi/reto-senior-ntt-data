@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 
 /**
@@ -14,16 +15,14 @@ public class CuentaCreateDTO {
     private String numeroCuenta;
 
     @NotBlank(message = "El tipo de cuenta es obligatorio")
+    @Pattern(regexp = "AHORRO|CORRIENTE", message = "El tipo de cuenta debe ser 'ahorro' o 'corriente'")
     private String tipo;
 
     @NotNull(message = "El saldo inicial no puede ser nulo")
     @PositiveOrZero(message = "El saldo inicial debe ser 0 o mayor")
     private BigDecimal saldoInicial;
 
-    @NotBlank(message = "El estado de la cuenta es obligatorio")
-    private Boolean estado;
-
-    @NotBlank(message = "El clienteId de la cuenta es obligatorio")
+    @NotNull(message = "El clienteId de la cuenta es obligatorio")
     private Long clienteId;
 
     // Getters y setters
@@ -49,14 +48,6 @@ public class CuentaCreateDTO {
 
     public void setSaldoInicial(BigDecimal saldoInicial) {
         this.saldoInicial = saldoInicial;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
     }
 
     public Long getClienteId() {

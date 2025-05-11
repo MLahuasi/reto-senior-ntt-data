@@ -35,12 +35,14 @@ public class ClienteController {
         this.cuentaCliente = cuentaClient;
     }
 
+    // F1: CRUDs
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClienteResponseDTO create(@Valid @RequestBody ClienteCreateDTO dto) {
         return clienteService.create(dto);
     }
 
+    // F1: CRUDs
     @GetMapping("/{id}")
     public ClienteResponseDTO getById(@PathVariable Long id) {
         return clienteService.findById(id);
@@ -51,6 +53,7 @@ public class ClienteController {
         return clienteService.findAll();
     }
 
+    // F1: CRUDs
     @PutMapping("/{id}")
     public ClienteResponseDTO update(
             @PathVariable Long id,
@@ -59,6 +62,7 @@ public class ClienteController {
         return clienteService.update(dto);
     }
 
+    // F1: CRUDs
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {

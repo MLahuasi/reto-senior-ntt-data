@@ -186,3 +186,27 @@ cuenta-service/
 | Cuenta-Service      | Perfil de pruebas (`application-test.yml`)                          |  (p)   |
 | Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
 | Cuenta-Service      | README específico del servicio                                      |   \*   |
+
+# FUNCIONES
+
+## F1 CRUD
+
+## F2 y F3 (Registro de movimientos y Alerta “Saldo no disponible”)
+
+**POST**
+
+```
+    http://localhost:8082/api/v1/movimientos
+```
+
+![](./assets/6-F2-F3.png)
+
+## F4 (Reportes: Generar un reporte de “Estado de cuenta” especificando un rango de fechas y cliente.)
+
+**GET**
+
+```
+    http://localhost:8082/api/v1/reportes/estado-cuenta?clienteId=18&fechaIni=2025-05-10&fechaFin=2025-05-11
+```
+
+![](./assets/7-F4-EstadoCuenta.png)

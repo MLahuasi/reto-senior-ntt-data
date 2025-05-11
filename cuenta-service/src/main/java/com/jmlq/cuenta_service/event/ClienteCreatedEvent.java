@@ -1,5 +1,7 @@
 package com.jmlq.cuenta_service.event;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,6 +15,9 @@ public class ClienteCreatedEvent {
     private final String telefono;
     private final String contrasena;
     private final Boolean estado;
+    private final BigDecimal saldoInicial;
+    private final String numeroCuenta;
+    private final String tipoCuenta;
 
     @JsonCreator
     public ClienteCreatedEvent(
@@ -24,7 +29,10 @@ public class ClienteCreatedEvent {
             @JsonProperty("direccion") String direccion,
             @JsonProperty("telefono") String telefono,
             @JsonProperty("contrasena") String contrasena,
-            @JsonProperty("estado") Boolean estado) {
+            @JsonProperty("estado") Boolean estado,
+            @JsonProperty("saldoInicial") BigDecimal saldoInicial,
+            @JsonProperty("numeroCuenta") String numeroCuenta,
+            @JsonProperty("tipoCuenta") String tipoCuenta) {
         this.clienteId = clienteId;
         this.nombre = nombre;
         this.genero = genero;
@@ -34,6 +42,9 @@ public class ClienteCreatedEvent {
         this.telefono = telefono;
         this.contrasena = contrasena;
         this.estado = estado;
+        this.saldoInicial = saldoInicial;
+        this.numeroCuenta = numeroCuenta;
+        this.tipoCuenta = tipoCuenta;
     }
 
     public Long getClienteId() {
@@ -72,4 +83,17 @@ public class ClienteCreatedEvent {
     public Boolean getEstado() {
         return estado;
     };
+
+    public BigDecimal getSaldoInicial() {
+        return saldoInicial;
+    };
+
+    public String getNumeroCuenta() {
+        return numeroCuenta;
+    };
+
+    public String getTipoCuenta() {
+        return tipoCuenta;
+    };
+
 }

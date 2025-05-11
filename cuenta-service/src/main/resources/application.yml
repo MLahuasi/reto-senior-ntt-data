@@ -29,8 +29,10 @@ server:
   servlet:
     context-path: /api/v1
 
-cliente-service:
-  url: http://localhost:8081
+# URL base de cliente-service para obtener nombre de cliente
+cliente:
+  service:
+    url: http://localhost:8081
 
 springdoc:
   api-docs:

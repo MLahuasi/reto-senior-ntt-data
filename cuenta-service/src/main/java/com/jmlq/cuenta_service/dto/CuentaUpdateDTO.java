@@ -10,13 +10,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CuentaUpdateDTO {
 
-    @NotNull(message = "El id de la cuenta es obligatorio")
     private Long id;
 
     @NotBlank(message = "El número de cuenta es obligatorio")
     private String numeroCuenta;
 
     @NotBlank(message = "El tipo de cuenta es obligatorio")
+    @Pattern(regexp = "AHORRO|CORRIENTE", message = "El tipo de cuenta debe ser 'ahorro' o 'corriente'")
     private String tipo;
 
     @NotNull(message = "El saldo inicial es obligatorio")

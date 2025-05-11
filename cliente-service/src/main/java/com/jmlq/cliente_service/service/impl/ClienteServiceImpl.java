@@ -55,7 +55,8 @@ public class ClienteServiceImpl implements ClienteService {
 
         // 3) Publicar evento asincrónico notificando creación
         System.out.println("Cliente creado con id: " + saved.getId());
-        ClienteCreatedEvent event = new ClienteCreatedEvent(saved.getId());
+        ClienteCreatedEvent event = new ClienteCreatedEvent(saved.getId(), dto.getNumeroCuenta(),
+                dto.getSaldoInicial(), dto.getTipoCuenta());
         // rabbitTemplate.convertAndSend(exchange, routingKey, event);
         Object reply = rabbitTemplate.convertSendAndReceive(exchange, routingKey, event);
         Long cuentaId = null;

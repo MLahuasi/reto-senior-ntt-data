@@ -28,6 +28,7 @@ public class MovimientoServiceImpl implements MovimientoService {
     @Autowired
     private MovimientoRepository movimientoRepository;
 
+    // F2: Registro de movimientos
     @Override
     public MovimientoReadDTO create(MovimientoCreateDTO dto) {
         Cuenta cuenta = cuentaRepository.findById(dto.getCuentaId())
@@ -97,21 +98,12 @@ public class MovimientoServiceImpl implements MovimientoService {
         movimientoRepository.delete(mov);
     }
 
-    @Override
-    public List<MovimientoReadDTO> getByCuenta(Long cuentaId) {
-        return movimientoRepository.findByCuentaIdOrderByFechaDesc(cuentaId)
-                .stream()
-                .map(this::mapToReadDTO)
-                .collect(Collectors.toList());
-    }
-
     private MovimientoReadDTO mapToReadDTO(Movimiento mov) {
         MovimientoReadDTO dto = new MovimientoReadDTO();
         dto.setId(mov.getId());
         dto.setFecha(mov.getFecha());
         dto.setTipo(mov.getTipoMovimiento());
         dto.setValor(mov.getValor());
-        dto.setSaldoResultante(mov.getSaldo());
         return dto;
     }
 }

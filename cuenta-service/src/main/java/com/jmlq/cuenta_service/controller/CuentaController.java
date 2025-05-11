@@ -17,9 +17,7 @@ import org.springframework.http.HttpStatus;
 import com.jmlq.cuenta_service.dto.CuentaCreateDTO;
 import com.jmlq.cuenta_service.dto.CuentaReadDTO;
 import com.jmlq.cuenta_service.dto.CuentaUpdateDTO;
-import com.jmlq.cuenta_service.dto.MovimientoReadDTO; // <-- DTO de movimiento
 import com.jmlq.cuenta_service.service.CuentaService;
-import com.jmlq.cuenta_service.service.MovimientoService; // <-- Servicio de movimientos
 
 import jakarta.validation.Valid;
 
@@ -29,20 +27,19 @@ import jakarta.validation.Valid;
 public class CuentaController {
 
     private final CuentaService cuentaService;
-    private final MovimientoService movimientoService;
 
-    public CuentaController(CuentaService cuentaService,
-            MovimientoService movimientoService) {
+    public CuentaController(CuentaService cuentaService) {
         this.cuentaService = cuentaService;
-        this.movimientoService = movimientoService;
     }
 
+    // F1: CRUDs
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CuentaReadDTO create(@Valid @RequestBody CuentaCreateDTO dto) {
         return cuentaService.create(dto);
     }
 
+    // F1: CRUDs
     @GetMapping("/{id}")
     public CuentaReadDTO getById(@PathVariable Long id) {
         return cuentaService.getById(id);
@@ -53,6 +50,7 @@ public class CuentaController {
         return cuentaService.getAll();
     }
 
+    // F1: CRUDs
     @PutMapping("/{id}")
     public CuentaReadDTO update(
             @PathVariable Long id,
@@ -61,17 +59,11 @@ public class CuentaController {
         return cuentaService.update(dto);
     }
 
+    // F1: CRUDs
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         cuentaService.delete(id);
     }
 
-    // ——————————————
-    // Nuevo endpoint para listar movimientos de esta cuenta
-    @GetMapping("/{id}/movimientos")
-    public List<MovimientoReadDTO> getMovimientosByCuenta(@PathVariable Long id) {
-        // Se delega en el servicio de movimientos
-        return movimientoService.getByCuenta(id);
-    }
 }
