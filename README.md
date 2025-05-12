@@ -190,7 +190,6 @@ cuenta-service/
 Como no se especificó en el documento técnico como debía ser implementado el proceso `async` usando `Rabbit`, se implementó lo siguiente:
 
 Cuando se crea un `Cliente` (cliente-service) envía `ClienteId`, `NumeoCuenta`, `SaldoInicial`, `TipoCuenta` hacia `Cuenta` (cuenta-service) mendiante `Rabbit`.
-Una vez que se inserta la `Cuenta` (cuenta-service) se envía `Cliente` (cliente-service) `CuentaId`
 
 ```
                                      Rabbit
@@ -202,8 +201,6 @@ Una vez que se inserta la `Cuenta` (cuenta-service) se envía `Cliente` (cliente
                                     TipoCuenta
                                 ------------------>
             Cliente (Create)                           Cuenta
-                                <------------------
-                                    CuentaId
 
 ```
 

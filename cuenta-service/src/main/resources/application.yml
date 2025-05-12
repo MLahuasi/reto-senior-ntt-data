@@ -43,6 +43,8 @@ springdoc:
 # ——————————————————————————————
 # Propiedades custom para RabbitConfig y CuentaListener
 rabbitmq:
+  template:
+    reply-timeout: 15000
   exchange:
     cliente: cliente.exchange
   queue:

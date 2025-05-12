@@ -33,7 +33,12 @@
 
 ```
     mvn clean package
-    mvn clean spring-boot:run
+
+    <!-- DESARROLLO -->
+    mvn spring-boot:run -D spring-boot.run.profiles=dev
+
+    <!-- PRODUCCION -->
+    mvn spring-boot:run
 ```
 
 ## PRUEBAS

@@ -40,6 +40,8 @@ springdoc:
 
 # Propiedades custom para RabbitConfig y ClienteServiceImpl
 rabbitmq:
+  template:
+    reply-timeout: 15000 # 10 s en vez de 5 s por defecto
   exchange:
     cliente: cliente.exchange
   routingkey:
