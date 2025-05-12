@@ -154,3 +154,11 @@ La clase `GlobalExceptionHandler` también permite capturar las excepciones que 
 **Cuenta-Service**: http://localhost:8082/api/v1/swagger-ui.html
 
 ![](./assets/5-1-swagger.png)
+
+## F9 - F10 - F11 - Subir Crud App en Azure con Swagger
+
+> - [Crear AppWeb en Azure](./cloud/README.md)
+
+```
+https://crudapi-test-jmlq-ebbqc8aha7a7c8fa.canadacentral-01.azurewebsites.net/swagger/index.html
+```

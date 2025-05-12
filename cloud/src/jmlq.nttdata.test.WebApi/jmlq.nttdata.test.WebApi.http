@@ -1,0 +1,6 @@
+@jmlq.nttdata.test.WebApi_HostAddress = http://localhost:5208
+
+GET {{jmlq.nttdata.test.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

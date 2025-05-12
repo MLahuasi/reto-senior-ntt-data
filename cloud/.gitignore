@@ -1,0 +1,63 @@
+## Build output ##############################################################
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+
+## Rider #####################################################################
+.idea/
+*.sln.iml
+
+## Visual Studio #############################################################
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Visual Studio Code ########################################################
+.vscode/
+
+## NuGet #####################################################################
+# Packages folder can be ignored because of Package Restore
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+*.nupkg
+# NuGet v3
+*.snupkg
+
+## Entity Framework Migrations ###############################################
+[Mm]igrations/
+
+## SQL Server files ##########################################################
+*.mdf
+*.ldf
+*.ndf
+
+## ASP.NET Scaffolding #######################################################
+ScaffoldingReadMe.txt
+
+## Logs ######################################################################
+*.log
+logs/
+
+## OS generated ##############################################################
+# Windows thumbnail cache
+Thumbs.db
+# macOS
+.DS_Store
+
+## User-specific #############################################################
+*.env
+appsettings.*.json
+*.Local.xml
+
+## JetBrains Rider ###########################################################
+.idea/
+
+## Publish output ############################################################
+**/bin/Debug/net8.0/publish/
+**/bin/Release/net8.0/publish/
+
+
