@@ -45,14 +45,4 @@ Las solicitudes se las realiza con: Body / raw / json
 
 ### ENDPOINTS
 
-#### SWAGGER
-
-1. Ingresar a la url:
-
-```
-    http://localhost:8082/api/v1/swagger-ui.html
-```
-
-![](../assets/5-swagger.png)
-
 [**REGRESAR**](../README.md)

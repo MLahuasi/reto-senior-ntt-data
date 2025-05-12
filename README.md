@@ -26,162 +26,11 @@ El reto contiene los siguientes directorios:
 └─ environment
 ```
 
-Donde:
-
-- environment: Genera un contenedor con la BDD Postgres y Rabbit (Operaciones Async entre microservicios). Además crea tablas mediante archivo BaseDatos.sql
-- cliente-service: Fuentes microservicio #1
-
-```
-cliente-service/
-├── pom.xml *
-├── Dockerfile (p)
-├── .dockerignore (p)
-├── src/
-│   ├── main/
-│   │   ├── java/com/jmlq/cliente_service/
-│   │   │   ├── controller/
-│   │   │   │   └── ClienteController.java *
-│   │   │   ├── dto/
-│   │   │   │   ├── ClienteCreateDTO.java *
-│   │   │   │   ├── ClienteDeleteDTO.java *
-│   │   │   │   ├── ClienteReadDTO.java *
-│   │   │   │   ├── ClienteResponseDTO.java *
-│   │   │   │   └── ClienteUpdateDTO.java *
-│   │   │   ├── mapper/
-│   │   │   │   └── ClienteMapper.java *
-│   │   │   ├── model/
-│   │   │   │   ├── Persona.java *
-│   │   │   │   └── Cliente.java *
-│   │   │   ├── repository/
-│   │   │   │   └── ClienteRepository.java *
-│   │   │   ├── service/
-│   │   │   │   ├── ClienteService.java *
-│   │   │   │   └── impl/
-│   │   │   │       └── ClienteServiceImpl.java *
-│   │   │   ├── config/
-│   │   │   │   └── RabbitConfig.java (p)
-│   │   │   └── event/
-│   │   │       └── ClienteCreatedEvent.java (p)
-│   ├── test/
-│   │   └── java/com/jmlq/cliente_service/
-│   │       ├── ClienteServiceTest.java (p)
-│   │       └── ClienteControllerTest.java (p)
-│   └── resources/
-│       ├── application.yml *
-│       └── application-test.yml (p)
-└── README.md (p)
-```
-
-> cuenta-service: Fuentes microservicio #2
-
-```
-
-cuenta-service/
-├── pom.xml *
-├── Dockerfile (p)
-├── .dockerignore (p)
-├── src/
-│   ├── main/
-│   │   ├── java/com/jmlq/cuenta_service/
-│   │   │   ├── controller/
-│   │   │   │   └── CuentaController.java (p)
-│   │   │   ├── dto/
-│   │   │   │   ├── CuentaCreateDTO.java *
-│   │   │   │   ├── CuentaReadDTO.java *
-│   │   │   │   ├── MovimientoCreateDTO.java *
-│   │   │   │   └── MovimientoReadDTO.java *
-│   │   │   ├── mapper/
-│   │   │   │   ├── CuentaMapper.java *
-│   │   │   │   └── MovimientoMapper.java *
-│   │   │   ├── model/
-│   │   │   │   ├── Cuenta.java *
-│   │   │   │   └── Movimiento.java *
-│   │   │   ├── repository/
-│   │   │   │   ├── CuentaRepository.java *
-│   │   │   │   └── MovimientoRepository.java *
-│   │   │   ├── service/
-│   │   │   │   ├── CuentaService.java (p)
-│   │   │   │   ├── MovimientoService.java (p)
-│   │   │   │   └── impl/
-│   │   │   │       ├── CuentaServiceImpl.java (p)
-│   │   │   │       └── MovimientoServiceImpl.java (p)
-│   │   │   ├── config/
-│   │   │   │   └── RabbitConfig.java (p)
-│   │   │   └── event/
-│   │   │       ├── CuentaCreatedEvent.java (p)
-│   │   │       └── MovimientoCreatedEvent.java (p)
-│   ├── test/
-│   │   └── java/com/jmlq/cuenta_service/
-│   │       ├── CuentaServiceTest.java (p)
-│   │       └── CuentaControllerTest.java (p)
-│   └── resources/
-│       ├── application.yml *
-│       └── application-test.yml (p)
-└── README.md (p)
-
-```
-
-## Levantar Imagen Docker BDD y Rabbit
-
-1. Ingresar al directorio [environment](./environment/)
-2. Ejecutar el comando:
-
-```
-    docker compose up -d
-```
-
-3. Se crea contenedor `Docker` con imagenes: `Postgres` y `Rabbit`
-
-   ![](./assets/1-docker-environment.png)
-
-4. Además se crean las tablas en la BDD
-
-   ![](./assets/2-create-tables.png)
-
 ## EJECUTAR PROYECTOS
 
 #### [Ejecutar cliente-service](./cliente-service/README.md)
 
 #### [Ejecutar cuenta-service](./cuenta-service/README.md)
-
-## STATUS DESARROLLO
-
-| Servicio            | Funcionalidad                                                       | Estado |
-| ------------------- | ------------------------------------------------------------------- | :----: |
-| **Cliente-Service** | CRUD de clientes (POST, GET, PUT, DELETE)                           |   \*   |
-| Cliente-Service     | Mapear DTO ↔ Entidad (`ClienteCreateDTO`, `ClienteReadDTO`…)        |   \*   |
-| Cliente-Service     | Repositorio JPA (`ClienteRepository`)                               |   \*   |
-| Cliente-Service     | Capa de servicio (`ClienteService` + `ClienteServiceImpl`)          |   \*   |
-| Cliente-Service     | Controller REST (`ClienteController`)                               |   \*   |
-| Cliente-Service     | Persistencia con Spring Data JPA y PostgreSQL                       |   \*   |
-| Cliente-Service     | Configuración de propiedades en `application.yml`                   |   \*   |
-| Cliente-Service     | README con instrucciones generales                                  |   \*   |
-| Cliente-Service     | Dockerfile                                                          |  (p)   |
-| Cliente-Service     | `.dockerignore`                                                     |  (p)   |
-| Cliente-Service     | Configuración RabbitMQ (`RabbitConfig`)                             |   \*   |
-| Cliente-Service     | Definición de eventos (ej. `ClienteCreatedEvent`)                   |   \*   |
-| Cliente-Service     | Publicación de eventos al crear                                     |   \*   |
-| Cliente-Service     | Consumo de eventos con `@RabbitListener`                            |   \*   |
-| Cliente-Service     | Swagger/OpenAPI (`springdoc-openapi`)                               |   \*   |
-| Cliente-Service     | Pruebas unitarias (servicio + controlador)                          |   \*   |
-| Cliente-Service     | Pruebas de integración (Testcontainers o BD embebida)               |   \*   |
-| Cliente-Service     | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
-| **Cuenta-Service**  | CRUD de cuentas (POST, GET, PUT, DELETE)                            |   \*   |
-| Cuenta-Service      | CRUD de movimientos (POST, GET)                                     |   \*   |
-| Cuenta-Service      | Mapear DTO ↔ Entidad (`CuentaCreateDTO`, `MovimientoReadDTO`…)      |   \*   |
-| Cuenta-Service      | Repositorios JPA (`CuentaRepository`, `MovimientoRepository`)       |   \*   |
-| Cuenta-Service      | Persistencia con Spring Data JPA y PostgreSQL                       |   \*   |
-| Cuenta-Service      | Configuración de propiedades en `application.yml`                   |   \*   |
-| Cuenta-Service      | Dockerfile                                                          |  (p)   |
-| Cuenta-Service      | `.dockerignore`                                                     |  (p)   |
-| Cuenta-Service      | Configuración RabbitMQ (`RabbitConfig`)                             |   \*   |
-| Cuenta-Service      | Definición de eventos (`ClienteCreatedEvent`)                       |   \*   |
-| Cuenta-Service      | Consumo de eventos con `@RabbitListener`                            |   \*   |
-| Cuenta-Service      | Servicios (`CuentaService`, `MovimientoService`) e implementaciones |   \*   |
-| Cuenta-Service      | Controller REST (`CuentaController`)                                |   \*   |
-| Cuenta-Service      | Swagger/OpenAPI (`springdoc-openapi`)                               |   \*   |
-| Cuenta-Service      | Validaciones con `@Valid` y Bean Validation en DTOs                 |   \*   |
-| Cuenta-Service      | README específico del servicio                                      |   \*   |
 
 # FUNCIONES
 
@@ -199,8 +48,7 @@ Cuando se crea un `Cliente` (cliente-service) envía `ClienteId`, `NumeoCuenta`,
                                     NumeoCuenta
                                     SaldoInicial
                                     TipoCuenta
-                                ------------------>
-            Cliente (Create)                           Cuenta
+             Cliente (Create)   ------------------>   Cuenta
 
 ```
 
@@ -213,6 +61,8 @@ Ejecutar:
 ```
 
 ## F1 CRUD
+
+Se adjunta [**EndPoints Postman**](./assets/NTT-DATA.postman_collection.json)
 
 ## F2 y F3 (Registro de movimientos y Alerta “Saldo no disponible”)
 
@@ -245,6 +95,31 @@ Ejecutar:
 [](./cliente-service/src/test/java/com/jmlq/cliente_service/ClienteIntegrationTest.java)
 
 ![](./assets/9-F6-PruebaIntegracion.png)
+
+## F7: Despliegue de la solución en contenedores
+
+### Levantar Imagen Docker BDD y Rabbit
+
+1. Ingresar al directorio [environment](./environment/)
+2. Ejecutar el comando:
+
+```
+    docker-compose up --build -d
+
+    NOTA: Una vez que finaliza el proceso de creación se debe esperar unos minutos hasta que se levanten bien los servicios.
+```
+
+3. Se crea contenedor `Docker` con subconedores: `2 Postgres`, `1 Rabbit`, `Cliente-Service` y `Cuenta-Service`
+
+   ![](./assets/10-F7-DespliegueContenedores.png)
+
+   **NOTA**: Considerar los puertos que usan los contenedores, se los configura en [docker-compose](./environment/docker-compose.yml).
+
+4. Además se crean las tablas en la BDD
+
+   ![](./assets/2-create-tables.png)
+
+   **NOTA**: Para ingresar a las bdd usar las credenciales registradas en el archivo [docker-compose](./environment/docker-compose.yml).
 
 ## F8 - Realizar la documentación con Swagger mediante OpenAPI
 

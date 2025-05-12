@@ -1,13 +1,11 @@
 spring:
-  config:
-    import: "optional:dotenv:./.env"
   application:
     name: cuenta-service
 
   datasource:
-    url: ${CUENTA_DATASOURCE_URL}
-    username: ${CUENTA_DATASOURCE_USERNAME}
-    password: ${CUENTA_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5435/cuentasdb
+    username: user
+    password: pass
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -18,23 +16,23 @@ spring:
       hibernate.format_sql: true
 
   rabbitmq:
-    host: ${RABBITMQ_HOST}
-    port: ${RABBITMQ_PORT}
-    username: ${RABBITMQ_USERNAME}
-    password: ${RABBITMQ_PASSWORD}
+    host: localhost
+    port: 5672
+    username: user
+    password: pass
 
   flyway:
     enabled: false
 
 server:
-  port: ${CUENTA_SERVICE_SERVER_PORT}
+  port: 8082
   servlet:
-    context-path: ${CUENTA_SERVICE_SERVLET_CONTEXT_PATH}
+    context-path: /api/v1
 
 # URL base de cliente-service para obtener nombre de cliente
 cliente:
   service:
-    url: ${CLIENTE_SERVICE_URL}
+    url: http://localhost:8081
 
 springdoc:
   api-docs:

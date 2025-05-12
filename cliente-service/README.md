@@ -201,14 +201,4 @@ Las solicitudes se las realiza con: Body / raw / json
 204 No Content
 ```
 
-#### SWAGGER
-
-1. Ingresar a la url:
-
-```
-    http://localhost:8081/api/v1/swagger-ui.html
-```
-
-![](../assets/4-swagger.png)
-
 [**REGRESAR**](../README.md)
