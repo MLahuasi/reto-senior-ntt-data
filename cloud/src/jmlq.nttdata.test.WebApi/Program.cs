@@ -1,5 +1,6 @@
 using jmlq.nttdata.test.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +11,32 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// 1) Registrar servicios de Swagger/OpenAPI
+builder.Services.AddEndpointsApiExplorer(); // Genera metadatos de endpoints
+builder.Services.AddSwaggerGen(
+    c => c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "jmlq.nttdata.test",
+        Version = "v1",
+        Description = "API para la prueba técnica de NTT Data"
+    })
+);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
+// Expone el JSON en GET /swagger/v1/swagger.json.
 app.UseSwagger();
-app.UseSwaggerUI();
+// Te da una consola interactiva en /index.html
+app.UseSwaggerUI(
+    c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "jmlq.nttdata.test v1");
+        c.RoutePrefix = string.Empty;  // Swagger UI en la raíz (ej: http://localhost:5000/index.html)
+    }
+);
 
 
 app.UseHttpsRedirection();
